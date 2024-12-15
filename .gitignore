@@ -50,3 +50,4 @@ __pycache__/
 .env.production
 
 api/app/data
+package-lock.json
