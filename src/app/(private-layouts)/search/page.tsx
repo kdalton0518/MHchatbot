@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { useSnackBar } from '@/src/providers/snackbarProvider'
-import { chatService } from '@/src/utils'
+import { Search } from 'lucide-react'
+import { chatService } from '@/src/services/chatService'
+import toast from 'react-hot-toast'
 
 interface SearchResult {
   id: number
@@ -15,11 +16,10 @@ export default function SemanticSearch() {
   const [searchQuery, setSearchQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
-  const { showSnackBar } = useSnackBar()
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
-      showSnackBar('Please enter a search query', 'warning')
+      toast.error('Please enter a search query')
       return
     }
 
@@ -28,10 +28,10 @@ export default function SemanticSearch() {
       const response = await chatService.semantic_search(searchQuery)
       setResults(response)
       if (response.length === 0) {
-        showSnackBar('No results found', 'info')
+        toast.success('No results found')
       }
     } catch (error) {
-      showSnackBar('Error performing semantic search', 'error')
+      toast.error('Error performing semantic search')
       console.error('Search error:', error)
     } finally {
       setLoading(false)
@@ -39,53 +39,79 @@ export default function SemanticSearch() {
   }
 
   return (
-    <div className='container max-w-5xl mx-auto p-4'>
-      <div className='mb-8'>
-        <h1 className='text-2xl font-bold text-gray-800 mb-4'>Semantic Search</h1>
-        <div className='flex gap-4'>
-          <input
-            type='text'
-            className='flex-grow p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none'
-            placeholder='Enter your search query...'
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-          />
-          <button
-            onClick={handleSearch}
-            disabled={loading}
-            className={`px-6 py-2 text-white rounded-lg ${
-              loading ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
-            }`}
-          >
-            {loading ? 'Searching...' : 'Search'}
-          </button>
+    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-green-100 to-green-200 dark:from-gray-900 dark:to-gray-800 py-8'>
+      <div className='container max-w-6xl mx-auto px-4'>
+        <div className='text-center mb-12'>
+          <h1 className='text-4xl font-bold text-gray-800 dark:text-white mb-4'>Semantic Search</h1>
+          <p className='text-gray-600 dark:text-gray-300'>
+            Search through our knowledge base using natural language
+          </p>
         </div>
-      </div>
 
-      <div className='overflow-x-auto'>
-        <table className='min-w-full table-auto border-collapse border border-gray-200'>
-          <thead>
-            <tr className='bg-gray-100'>
-              <th className='border border-gray-300 px-4 py-2 text-left'>ID</th>
-              <th className='border border-gray-300 px-4 py-2 text-left'>Context</th>
-              <th className='border border-gray-300 px-4 py-2 text-left'>Response</th>
-              <th className='border border-gray-300 px-4 py-2 text-left'>Similarity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((row) => (
-              <tr key={row.id} className='hover:bg-gray-50'>
-                <td className='border border-gray-300 px-4 py-2'>{row.id}</td>
-                <td className='border border-gray-300 px-4 py-2'>{row.context}</td>
-                <td className='border border-gray-300 px-4 py-2'>{row.response}</td>
-                <td className='border border-gray-300 px-4 py-2'>
-                  {(1 - row.similarity).toFixed(2)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className='relative max-w-3xl mx-auto mb-12 border-none'>
+          <div className='flex items-center bg-white border-none dark:bg-gray-800 rounded-xl shadow-lg'>
+            <input
+              type='text'
+              className='w-full px-6 py-4 text-lg border-none rounded-l-xl focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white'
+              placeholder='What would you like to search for?'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            />
+            <button
+              onClick={handleSearch}
+              disabled={loading}
+              className={`px-8 py-4 border-none rounded-r-xl flex items-center gap-2 ${
+                loading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-500 transition-colors'
+              } text-white`}
+            >
+              <Search className='h-5 w-5' />
+              {loading ? 'Searching...' : 'Search'}
+            </button>
+          </div>
+        </div>
+
+        {results.length > 0 && (
+          <div className='bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 overflow-hidden'>
+            <div className='overflow-x-auto'>
+              <table className='w-full'>
+                <thead>
+                  <tr className='border-b dark:border-gray-700'>
+                    <th className='px-6 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300'>
+                      ID
+                    </th>
+                    <th className='px-6 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300'>
+                      Context
+                    </th>
+                    <th className='px-6 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300'>
+                      Response
+                    </th>
+                    <th className='px-6 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300'>
+                      Similarity
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {results.map((row) => (
+                    <tr
+                      key={row.id}
+                      className='border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'
+                    >
+                      <td className='px-6 py-4 text-gray-800 dark:text-gray-200'>{row.id}</td>
+                      <td className='px-6 py-4 text-gray-800 dark:text-gray-200'>{row.context}</td>
+                      <td className='px-6 py-4 text-gray-800 dark:text-gray-200'>{row.response}</td>
+                      <td className='px-6 py-4 text-gray-800 dark:text-gray-200'>
+                        <span className='inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full'>
+                          {(1 - row.similarity).toFixed(2)}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

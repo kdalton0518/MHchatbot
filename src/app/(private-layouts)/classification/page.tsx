@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useSnackBar } from '@/src/providers/snackbarProvider'
-import { chatService } from '@/src/utils'
+import toast from 'react-hot-toast'
+import { chatService } from '@/src/services/chatService'
 
 interface PredictionResult {
   problem_type: string
@@ -16,11 +16,10 @@ export default function MLclassification() {
   const [patientDescription, setPatientDescription] = useState('')
   const [predictions, setPredictions] = useState<PredictionResult | null>(null)
   const [loading, setLoading] = useState(false)
-  const { showSnackBar } = useSnackBar()
 
   const handlePredict = async () => {
     if (!patientDescription.trim()) {
-      showSnackBar('Please enter a patient description', 'warning')
+      toast.error('Please enter a patient description')
       return
     }
 
@@ -30,9 +29,9 @@ export default function MLclassification() {
         description: patientDescription,
       })
       setPredictions(response.data)
-      showSnackBar('Prediction completed successfully', 'success')
+      toast.success('Prediction completed successfully')
     } catch (error) {
-      showSnackBar('Error performing prediction', 'error')
+      toast.error('Error performing prediction')
       console.error('Prediction error:', error)
     } finally {
       setLoading(false)
@@ -40,98 +39,124 @@ export default function MLclassification() {
   }
 
   return (
-    <div className='max-w-5xl mx-auto p-4'>
-      <div className='mb-8'>
-        <h1 className='text-2xl font-bold text-gray-800 mb-4'>
-          Response Predictor Using Machine Learning Model
+    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-green-100 to-green-200 dark:from-gray-900 dark:to-gray-800 py-8'>
+      <div className='container max-w-6xl mx-auto px-4'>
+        <h1 className='text-3xl font-bold text-gray-800 dark:text-white mb-4 text-center'>
+          AI-Powered Response Predictor
         </h1>
-        <p className='text-gray-600 mb-6'>
-          Enter a description of the patient&apos;s situation to predict the likely response type
-          and recommended approach.
+        <p className='text-gray-600 dark:text-gray-300 text-center text-lg mb-8'>
+          Let our advanced ML model analyze patient situations and provide intelligent
+          recommendations
         </p>
 
-        <textarea
-          className='w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none'
-          rows={4}
-          value={patientDescription}
-          onChange={(e) => setPatientDescription(e.target.value)}
-          placeholder="Describe the patient's situation, symptoms, or concerns..."
-        ></textarea>
-      </div>
+        <div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6'>
+          <textarea
+            className='w-full p-4 border-2 border-gray-100 dark:border-gray-700 rounded-xl 
+                     focus:ring-2 focus:ring-green-400 focus:border-transparent 
+                     transition-all duration-200 text-gray-700 dark:text-gray-200 
+                     bg-white dark:bg-gray-800 min-h-[150px]'
+            value={patientDescription}
+            onChange={(e) => setPatientDescription(e.target.value)}
+            placeholder="Describe the patient's situation, symptoms, or concerns in detail..."
+          ></textarea>
+        </div>
 
-      <button
-        onClick={handlePredict}
-        disabled={loading}
-        className={`px-6 py-2 text-white rounded-lg ${
-          loading ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
-        }`}
-      >
-        {loading ? (
-          <div className='flex items-center'>
-            <svg
-              className='animate-spin h-5 w-5 mr-2 text-white'
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-            >
-              <circle
-                className='opacity-25'
-                cx='12'
-                cy='12'
-                r='10'
-                stroke='currentColor'
-                strokeWidth='4'
-              ></circle>
-              <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8v8H4z'></path>
-            </svg>
-            Analyzing...
-          </div>
-        ) : (
-          'Predict Response'
-        )}
-      </button>
+        <div className='text-center'>
+          <button
+            onClick={handlePredict}
+            disabled={loading}
+            className={`px-8 py-3 text-lg font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 ${
+              loading
+                ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
+                : 'bg-green-500 hover:bg-green-600 text-white hover:shadow-lg'
+            }`}
+          >
+            {loading ? (
+              <div className='flex items-center justify-center'>
+                <svg className='animate-spin h-5 w-5 mr-3' viewBox='0 0 24 24'>
+                  <circle
+                    className='opacity-25'
+                    cx='12'
+                    cy='12'
+                    r='10'
+                    stroke='currentColor'
+                    strokeWidth='4'
+                    fill='none'
+                  />
+                  <path
+                    className='opacity-75'
+                    fill='currentColor'
+                    d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                  />
+                </svg>
+                Analyzing...
+              </div>
+            ) : (
+              'Generate Prediction'
+            )}
+          </button>
+        </div>
 
-      {predictions && (
-        <div className='mt-8 bg-white p-6 rounded-lg shadow-md'>
-          <h2 className='text-xl font-semibold text-gray-800 mb-4'>Prediction Results</h2>
+        {predictions && (
+          <div className='mt-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8'>
+            <h2 className='text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center'>
+              Analysis Results
+            </h2>
 
-          <div className='mb-4'>
-            <h3 className='text-lg font-medium text-blue-600'>Problem Type:</h3>
-            <span className='mt-1 inline-block bg-blue-500 text-white px-3 py-1 rounded-lg'>
-              {predictions.problem_type}
-            </span>
-          </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+              <div className='space-y-6'>
+                <div className='bg-gray-50 dark:bg-gray-700 p-6 rounded-xl'>
+                  <h3 className='text-lg font-semibold text-gray-800 dark:text-white mb-3'>
+                    Problem Classification
+                  </h3>
+                  <span className='inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-medium'>
+                    {predictions.problem_type}
+                  </span>
+                </div>
 
-          <div className='mb-4'>
-            <h3 className='text-lg font-medium text-blue-600'>Predicted Response Type:</h3>
-            <span className='mt-1 inline-block bg-purple-500 text-white px-3 py-1 rounded-lg'>
-              {predictions.response_type}
-            </span>
-            <p className='mt-2 text-gray-600'>
-              Confidence: {(predictions.confidence * 100).toFixed(1)}%
-            </p>
-          </div>
+                <div className='bg-gray-50 dark:bg-gray-700 p-6 rounded-xl'>
+                  <h3 className='text-lg font-semibold text-gray-800 dark:text-white mb-3'>
+                    Response Type
+                  </h3>
+                  <span className='inline-block bg-green-600 text-white px-4 py-2 rounded-lg font-medium'>
+                    {predictions.response_type}
+                  </span>
+                  <div className='mt-3 text-gray-700 dark:text-gray-300'>
+                    Confidence: {(predictions.confidence * 100).toFixed(1)}%
+                  </div>
+                </div>
+              </div>
 
-          <div className='mb-4'>
-            <h3 className='text-lg font-medium text-blue-600'>Likely Associated Issues:</h3>
-            <div className='mt-2 flex flex-wrap gap-2'>
-              {predictions.likely_issues.map((issue, index) => (
-                <span
-                  key={index}
-                  className='inline-block border border-gray-300 px-3 py-1 rounded-lg text-sm'
-                >
-                  {issue}
-                </span>
-              ))}
+              <div className='space-y-6'>
+                <div className='bg-gray-50 dark:bg-gray-700 p-6 rounded-xl'>
+                  <h3 className='text-lg font-semibold text-gray-800 dark:text-white mb-3'>
+                    Associated Issues
+                  </h3>
+                  <div className='flex flex-wrap gap-2'>
+                    {predictions.likely_issues.map((issue, index) => (
+                      <span
+                        key={index}
+                        className='inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 px-3 py-1 rounded-lg text-sm font-medium'
+                      >
+                        {issue}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className='bg-gray-50 dark:bg-gray-700 p-6 rounded-xl'>
+                  <h3 className='text-lg font-semibold text-gray-800 dark:text-white mb-3'>
+                    Recommended Approach
+                  </h3>
+                  <p className='text-gray-700 dark:text-gray-300'>
+                    {predictions.recommended_approach}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div>
-            <h3 className='text-lg font-medium text-blue-600'>Recommended Approach:</h3>
-            <p className='mt-2 text-gray-600'>{predictions.recommended_approach}</p>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

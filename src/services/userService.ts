@@ -3,6 +3,19 @@ import { User } from '@prisma/client'
 
 const API_URL = process.env.NEXT_PUBLIC_FASTAPI_BACKEND_URL
 
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => {
+    Promise.reject(error)
+  },
+)
+
 class UserService {
   async getProfile(): Promise<User> {
     const response = await axios.get(API_URL + 'users/me')
@@ -35,5 +48,4 @@ class UserService {
   }
 }
 
-const userService = new UserService()
-export default userService
+export const userService = new UserService()

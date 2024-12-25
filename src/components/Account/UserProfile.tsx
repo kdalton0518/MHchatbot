@@ -3,11 +3,8 @@ import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { User } from '@prisma/client'
-import { useAuth } from '@/src/providers/authProvider'
-import { useSnackBar } from '@/src/providers/snackbarProvider'
-import { userService } from '@/src/utils'
+import { userService } from '@/src/services/userService'
 import { useTheme } from 'next-themes'
-import Image from 'next/image'
 
 interface UserProfileProps {
   userProfile: User
@@ -26,8 +23,7 @@ export default function UserProfile(props: UserProfileProps) {
   } = useForm<User>({
     defaultValues: userProfile,
   })
-  const { user: currentUser, setUser, logout } = useAuth()
-  const { showSnackBar } = useSnackBar()
+
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -36,29 +32,29 @@ export default function UserProfile(props: UserProfileProps) {
 
   const onSubmit: SubmitHandler<User> = async (data) => {
     let updatedUser: User
-    try {
-      if (currentUser?.id === userProfile.id) {
-        updatedUser = await userService.updateProfile(data)
-        setUser(updatedUser)
-        showSnackBar('User profile updated successfully.', 'success')
-      } else {
-        updatedUser = await userService.updateUser(userProfile.id, data)
-        showSnackBar('User profile updated successfully.', 'success')
-      }
-      if (onUserUpdated) {
-        onUserUpdated(updatedUser)
-      }
-    } catch (error) {
-      const msg =
-        error instanceof AxiosError &&
-        error.response &&
-        typeof error.response.data.detail === 'string'
-          ? error.response.data.detail
-          : error instanceof Error
-          ? error.message
-          : String(error)
-      showSnackBar(msg, 'error')
-    }
+    // try {
+    //   if (currentUser?.id === userProfile.id) {
+    //     updatedUser = await userService.updateProfile(data)
+    //     setUser(updatedUser)
+    //     showSnackBar('User profile updated successfully.', 'success')
+    //   } else {
+    //     updatedUser = await userService.updateUser(userProfile.id, data)
+    //     showSnackBar('User profile updated successfully.', 'success')
+    //   }
+    //   if (onUserUpdated) {
+    //     onUserUpdated(updatedUser)
+    //   }
+    // } catch (error) {
+    //   const msg =
+    //     error instanceof AxiosError &&
+    //     error.response &&
+    //     typeof error.response.data.detail === 'string'
+    //       ? error.response.data.detail
+    //       : error instanceof Error
+    //       ? error.message
+    //       : String(error)
+    //   showSnackBar(msg, 'error')
+    // }
   }
 
   const handleDeleteProfile = () => setOpen(true)
@@ -68,13 +64,11 @@ export default function UserProfile(props: UserProfileProps) {
   const handleConfirm = async () => {
     setOpen(false)
     await userService.deleteSelf()
-    showSnackBar('Your account has been deleted.', 'success')
-    logout()
     redirect('/')
   }
 
   return (
-    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-green-100 to-green-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center p-4'>
+    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-green-100 to-green-200 dark:to-gray-900 dark:from-gray-800 flex items-center justify-center p-4'>
       <div className='w-full max-w-md backdrop-blur-sm backdrop-filter'>
         <div
           className={`max-w-2xl mx-auto p-8 rounded-2xl shadow-2xl ${

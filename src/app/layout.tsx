@@ -1,6 +1,5 @@
 import '@/src/styles/globals.css'
 import type { Metadata } from 'next'
-import { SnackBarProvider } from '@/src/providers/snackbarProvider'
 import { NextAuthProvider } from '@/src/providers/sessionProvider'
 import { ThemeProvider } from '@/src/providers/themeProvider'
 import { siteConfig } from '@/src/config/site'
@@ -23,14 +22,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body className={cn('bg-background min-h-screen font-sans antialiased', fontSans.variable)}>
         <NextAuthProvider>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
             <Toaster position='top-right' />
-            <main>
-              <SnackBarProvider>{children}</SnackBarProvider>
-            </main>
+            <main>{children}</main>
           </ThemeProvider>
         </NextAuthProvider>
       </body>

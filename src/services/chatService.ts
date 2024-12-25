@@ -1,6 +1,19 @@
 import axios from 'axios'
 
-const API_URL = process.env.NEXT_PUBLIC_FASTAPI_BACKEND_URL
+const API_URL = process.env.NEXT_PUBLIC_FASTAPI_URL
+
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => {
+    Promise.reject(error)
+  },
+)
 
 class ChatService {
   async send_user_message(user_message: String) {
@@ -24,5 +37,4 @@ class ChatService {
   }
 }
 
-const moduleService = new ChatService()
-export default moduleService
+export const chatService = new ChatService()

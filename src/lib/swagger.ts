@@ -6,7 +6,7 @@ export const getApiDocs = async () => {
     definition: {
       openapi: '3.0.0',
       info: {
-        title: 'Master Scraper APIs',
+        title: 'MHChatbot APIs',
         version: '1.0',
       },
       servers: [
