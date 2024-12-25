@@ -9,7 +9,8 @@
     "lint": "next lint",
     "migrate": "prisma migrate dev",
     "postinstall": "prisma generate",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "seed": "ts-node prisma/seed"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -23,22 +24,30 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
     "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.468.0",
     "next": "^14.2.13",
     "next-auth": "^4.24.11",
+    "next-swagger-doc": "^0.4.1",
     "next-themes": "^0.4.4",
     "openai": "^4.76.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.53.2",
+    "react-hot-toast": "^2.4.1",
     "react-markdown": "^9.0.1",
+    "swagger-ui-react": "^5.18.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/swagger-ui-react": "^4.18.3",
     "@types/node": "22.5.5",
     "@types/react": "18.3.8",
     "@types/react-dom": "18.3.0",
@@ -48,6 +57,7 @@
     "postcss": "^8.4.49",
     "prisma": "^6.0.1",
     "tailwindcss": "^3.4.16",
+    "ts-node": "^10.9.2",
     "typescript": "5.6.2"
   }
 }

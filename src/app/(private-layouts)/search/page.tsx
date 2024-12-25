@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useSnackBar } from '@/src/providers/snackbar-provider'
+import { useSnackBar } from '@/src/providers/snackbarProvider'
 import { chatService } from '@/src/utils'
 
 interface SearchResult {

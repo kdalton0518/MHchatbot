@@ -2,7 +2,7 @@
 
 import { getUser } from '@/src/lib/auth'
 import { redirect } from 'next/navigation'
-import TopMenuBar from '@/src/components/Sidebar/TopMenuBar'
+import { TopMenuBar } from '@/src/components/Sidebar/TopMenuBar'
 import { PropsWithChildren } from 'react'
 
 export default async function PrivateLayout({ children }: PropsWithChildren) {

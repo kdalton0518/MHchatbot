@@ -9,25 +9,17 @@ export default function Profile() {
     return null
   }
   return (
-    <div className='container mx-auto mt-4 mb-4 px-4'>
-      <div className='flex justify-center'>
-        <div className='w-full max-w-lg'>
-          <div className='p-4 bg-gray shadow rounded-md flex flex-col'>
-            <UserProfile
-              userProfile={{
-                name: session.user.name ?? null,
-                id: session.user.id,
-                email: session.user.email ?? null,
-                emailVerified: session.user.emailVerified ?? null,
-                image: session.user.image ?? null,
-                password: session.user.password ?? null,
-                is_active: session.user.is_active ?? null,
-              }}
-              allowDelete={true}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <UserProfile
+      userProfile={{
+        name: session.user.name ?? null,
+        id: session.user.id,
+        email: session.user.email ?? null,
+        image: session.user.image ?? null,
+        password: null,
+        created_at: new Date(),
+        updated_at: new Date(),
+      }}
+      allowDelete={true}
+    />
   )
 }

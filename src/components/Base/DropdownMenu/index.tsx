@@ -10,17 +10,28 @@ interface MenuItemType {
 interface DropdownMenuProps {
   primary: MenuItemType[]
   secondary: MenuItemType[]
+  userimage?: string
+  username?: string
 }
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ primary = [], secondary = [] }) => {
+const DropdownMenu: React.FC<DropdownMenuProps> = ({
+  primary = [],
+  secondary = [],
+  userimage,
+  username,
+}) => {
   return (
     <DropdownMenuPrimitive.Root>
       <DropdownMenuPrimitive.Trigger asChild>
         <button
-          className='inline-flex size-[35px] items-center justify-center text-gray-100 border-none outline-none hover:text-gray-500 transition-colors duration-200 focus:outline-none focus:ring-0'
-          aria-label='Menu options'
+          className='inline-flex size-[40px] items-center justify-center rounded-full bg-gray-200 text-gray-700 border-none outline-none hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-0'
+          aria-label='User menu'
         >
-          <HamburgerMenuIcon className='w-6 h-6' />
+          <img
+            src={userimage || undefined}
+            alt={`${username}`}
+            className='w-10 h-10 rounded-full object-cover'
+          />
         </button>
       </DropdownMenuPrimitive.Trigger>
 

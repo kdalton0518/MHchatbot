@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react'
 
 export default async function PublicLayout({ children }: PropsWithChildren) {
   const session = await getUser()
-  if (session?.user) redirect('/dashboard')
+  if (session?.user) redirect('/apis')
 
   return <>{children}</>
 }
