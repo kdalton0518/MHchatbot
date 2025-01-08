@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://nextjs-fastapi-starter.vercel.app/">
     <img src="https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" height="96">
-    <h3 align="center">Next.js FastAPI Starter</h3>
+    <h3 align="center">Mental Health Counseling Chatbot</h3>
   </a>
 </p>
 
@@ -27,7 +27,7 @@ In production, the FastAPI server is hosted as [Python serverless functions](htt
 
 ## Demo
 
-https://nextjs-fastapi-starter.vercel.app/
+<https://nextjs-fastapi-starter.vercel.app/>
 
 ## Deploy Your Own
 

@@ -1,0 +1,23 @@
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts",
+    "next.config.*": "*.config.js, *.config.ts",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, ",
+    ".prettierrc.*": ".eslint*, eslint*, .prettier*, prettier*, .editorconfig",
+    "prisma/schema.prisma": ".env, .env.*",
+    "src/lib/auth.ts": "middleware.ts"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "tailwindCSS.experimental.classRegex": [["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}

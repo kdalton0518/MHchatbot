@@ -1,0 +1,23 @@
+.dark .swagger-ui .opblock-tag,
+.dark .swagger-ui .info .title {
+  color: rgb(209, 213, 219) !important;
+}
+
+.dark .swagger-ui .opblock .opblock-summary-description,
+.dark .swagger-ui .opblock-description-wrapper p {
+  color: #d1d5db !important;
+}
+
+.dark .swagger-ui .opblock-tag small {
+  color: #9ca3af !important;
+}
+
+.scheme-container {
+  background-color: rgb(243, 244, 246) !important;
+  border-radius: 0.5rem !important;
+}
+
+.dark .scheme-container {
+  background-color: rgb(31, 41, 55) !important;
+  border-radius: 0.5rem !important;
+}

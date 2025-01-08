@@ -52,3 +52,4 @@ __pycache__/
 api/app/data
 package-lock.json
 prisma/migrations
+prisma/embeddings.csv

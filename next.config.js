@@ -3,11 +3,11 @@ const nextConfig = {
   rewrites: async () => {
     return [
       {
-        source: '/api/py/:path*',
+        source: '/api/v1/:path*',
         destination:
           process.env.NODE_ENV === 'development'
-            ? 'http://192.168.111.116:8000/api/py/:path*'
-            : '/api/',
+            ? 'http://localhost:8000/api/v1/:path*'
+            : '/api/v1/:path*',
       },
     ]
   },

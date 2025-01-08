@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
 import { chatService } from '@/src/services/chatService'
+import { useSession } from 'next-auth/react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 interface Message {
@@ -10,6 +11,8 @@ interface Message {
 }
 
 const LLMchatbot: React.FC = () => {
+  const { data: session } = useSession()
+  const userId = session?.user.id || ''
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState<string>('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -17,17 +20,17 @@ const LLMchatbot: React.FC = () => {
   useEffect(() => {
     const loadChatHistory = async () => {
       try {
-        const history = await chatService.get_chat_history()
+        const history = await chatService.get_chat_history(userId)
         const formattedHistory: Message[] = []
 
         history.forEach((conversation: any) => {
           formattedHistory.push({
             role: 'user',
-            content: conversation['user_message'],
+            content: conversation['user'],
           })
           formattedHistory.push({
             role: 'assistant',
-            content: conversation['llm_message'],
+            content: conversation['assistant'],
           })
         })
 
@@ -39,7 +42,7 @@ const LLMchatbot: React.FC = () => {
     }
 
     loadChatHistory()
-  }, [])
+  }, [userId])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -65,7 +68,7 @@ const LLMchatbot: React.FC = () => {
   }
 
   const fetchAssistantResponse = async (user_message: string) => {
-    const response = await chatService.send_user_message(user_message)
+    const response = await chatService.send_user_message(user_message, userId)
     return response.response || "Sorry, I couldn't process your request."
   }
 
@@ -77,50 +80,86 @@ const LLMchatbot: React.FC = () => {
   }
 
   return (
-    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-green-100 to-green-200 dark:from-gray-900 dark:to-gray-800 py-8'>
-      <div className='container max-w-6xl mx-auto px-6'>
-        <h1 className='text-3xl font-bold text-center mb-6 text-gray-800 dark:text-white'>
-          Mental Health Counseling Chatbot
-        </h1>
-        <div className='h-[520px] overflow-y-auto p-6 bg-white rounded-xl shadow-lg ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700'>
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} mb-4`}
-            >
-              {message.role === 'assistant' && (
-                <div className='w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center mr-3'>
-                  A
-                </div>
-              )}
-              <div
-                className={`px-4 py-3 rounded-xl ${
-                  message.role === 'user'
-                    ? 'bg-green-200 text-white dark:bg-green-600 dark:text-white'
-                    : 'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-300'
-                } shadow-md max-w-[70%]`}
-              >
-                <ReactMarkdown>{message.content}</ReactMarkdown>
-              </div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
-        <div className='flex mt-4'>
-          <textarea
-            className='flex-1 border border-gray-300 rounded-lg p-2 text-lg shadow-md resize-none focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white'
-            placeholder='Type your message...'
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            className='ml-4 px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-lg hover:bg-green-500 focus:ring-2 focus:ring-green-500 transition-all duration-200 dark:bg-green-500 dark:hover:bg-green-600'
-            onClick={handleSend}
+    <div className='bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
+      <div className='container max-w-6xl mx-auto mb-20 pb-10'>
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`flex items-start gap-3 ${
+              message.role === 'user' ? 'justify-end' : 'justify-start'
+            }`}
           >
-            Send
-          </button>
+            {message.role === 'assistant' && (
+              <div className='flex-shrink-0'>
+                <img
+                  src='/icons/bot1.jpg'
+                  alt='AI Assistant'
+                  className='w-10 h-10 rounded-full ring-2 ring-green-500 p-1 bg-gray-700'
+                />
+              </div>
+            )}
+            <div
+              className={`mb-4 px-4 py-3 rounded-2xl max-w-[70%] ${
+                message.role === 'user'
+                  ? 'bg-green-600 text-white rounded-tr-none dark:bg-gray-700 dark:text-gray-300'
+                  : 'bg-green-100 text-gray-900 rounded-tl-none dark:bg-gray-900 dark:text-gray-400'
+              }`}
+            >
+              <ReactMarkdown className='prose prose-gray max-w-none leading-relaxed'>
+                {message.content}
+              </ReactMarkdown>
+            </div>
+            {message.role === 'user' && (
+              <div className='flex-shrink-0'>
+                <img
+                  src={session?.user?.image || '/icons/user1.jpg'}
+                  alt={session?.user?.name || 'User'}
+                  className='w-10 h-10 rounded-full ring-2 ring-green-500 p-1 bg-gray-700'
+                />
+              </div>
+            )}
+          </div>
+        ))}
+
+        <div className='fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900'>
+          <div className='container max-w-6xl mx-auto'>
+            <div className='relative'>
+              <input
+                type='text'
+                className='w-full px-6 py-4 text-md border-none rounded-xl shadow-md dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 resize-none'
+                placeholder='Type your message...'
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
+              <button
+                className='absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-green-500 text-white rounded-lg hover:bg-green-400 focus:ring-2 focus:ring-green-500 transition-all duration-200'
+                onClick={handleSend}
+              >
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-6 w-6'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M5 10l7-7 7 7m-7-7v18'
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className='text-center mt-1'>
+              <span className='text-xs text-gray-500 dark:text-gray-400 text-center'>
+                MHChatbot can make mistakes. Check important info.
+              </span>
+            </div>
+          </div>
         </div>
+        <div ref={messagesEndRef} />
       </div>
     </div>
   )

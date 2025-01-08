@@ -1,12 +1,14 @@
-import { getApiDocs } from '@/src/lib/swagger'
-
 import ReactSwagger from '@/src/components/SwaggerDocumentation'
+import { getApiDocs } from '@/src/lib/swagger'
+import '@/src/styles/swagger.css'
 
 export default async function Scrapers() {
   const spec = await getApiDocs()
   return (
-    <section className='container'>
-      <ReactSwagger spec={spec} />
-    </section>
+    <div className='bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
+      <div className='container max-w-6xl mx-auto mb-20 pb-10'>
+        <ReactSwagger spec={spec} />
+      </div>
+    </div>
   )
 }

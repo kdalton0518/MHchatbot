@@ -1,10 +1,8 @@
-import { AxiosError } from 'axios'
+import { User } from '@prisma/client'
+import { useTheme } from 'next-themes'
 import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { User } from '@prisma/client'
-import { userService } from '@/src/services/userService'
-import { useTheme } from 'next-themes'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface UserProfileProps {
   userProfile: User
@@ -63,7 +61,7 @@ export default function UserProfile(props: UserProfileProps) {
 
   const handleConfirm = async () => {
     setOpen(false)
-    await userService.deleteSelf()
+    // await userService.deleteSelf()
     redirect('/')
   }
 
@@ -81,7 +79,7 @@ export default function UserProfile(props: UserProfileProps) {
                 <input type='file' className='hidden' accept='image/*' />
                 <div className='relative'>
                   <img
-                    src={userProfile.image || '/icons/default_user_avatar2.png'}
+                    src={userProfile.image || '/icons/user1.jpg'}
                     alt={`${userProfile.name}`}
                     className='w-24 h-24 rounded-full object-cover ring-4 ring-green-400 transition-transform duration-300 group-hover:scale-105'
                   />

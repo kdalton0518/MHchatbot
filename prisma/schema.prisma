@@ -9,28 +9,53 @@ datasource db {
 }
 
 model AuthProvider {
-  id                  String    @id @default(cuid())
-  user_id             String
-  type                String
-  provider            String
-  provider_user_id    String
-  access_token        String?   @db.Text
-  refresh_token       String?   @db.Text
-  created_at          DateTime  @default(now())
+  id               String   @id @default(cuid())
+  user_id          String
+  type             String
+  provider         String
+  provider_user_id String
+  access_token     String?  @db.Text
+  refresh_token    String?  @db.Text
+  created_at       DateTime @default(now())
 
-  user                User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@unique([provider, provider_user_id])
 }
 
 model User {
-  id               String    @id @default(cuid())
-  email            String?   @unique
-  password         String?   @db.Text
-  name             String?
-  image            String?
-  created_at       DateTime  @default(now())
-  updated_at       DateTime  @default(now())
+  id         String   @id @default(cuid())
+  email      String?  @unique
+  password   String?  @db.Text
+  name       String?
+  image      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 
-  auth_providers   AuthProvider[]
+  auth_providers AuthProvider[]
+  conversations  Conversations[]
 }
+
+model Conversations {
+  id         String   @id @default(cuid())
+  user       String?
+  assistant  String?
+  user_id    String
+  created_at DateTime @default(now())
+
+  user_foreign_key User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Embedding {
+  id              Int     @id @default(autoincrement())
+  context         String  @db.Text
+  response        String  @db.Text
+  semantic_vector Float[]
+}
+
+// After migration these models, you should run this script to change data type
+
+// create extension vector;
+// ALTER TABLE public."Embedding" 
+// ALTER COLUMN "semantic_vector" TYPE vector(1536) 
+// USING "semantic_vector"::vector;

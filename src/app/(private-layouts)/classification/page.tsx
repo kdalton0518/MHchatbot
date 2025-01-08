@@ -1,8 +1,8 @@
 'use client'
 
+import { chatService } from '@/src/services/chatService'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { chatService } from '@/src/services/chatService'
 
 interface PredictionResult {
   problem_type: string
@@ -39,22 +39,14 @@ export default function MLclassification() {
   }
 
   return (
-    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-green-100 to-green-200 dark:from-gray-900 dark:to-gray-800 py-8'>
+    <div className='relative h-screen bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900 overflow-hidden'>
       <div className='container max-w-6xl mx-auto px-4'>
-        <h1 className='text-3xl font-bold text-gray-800 dark:text-white mb-4 text-center'>
-          AI-Powered Response Predictor
-        </h1>
-        <p className='text-gray-600 dark:text-gray-300 text-center text-lg mb-8'>
-          Let our advanced ML model analyze patient situations and provide intelligent
-          recommendations
-        </p>
-
-        <div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6'>
+        <div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mt-10 mb-6'>
           <textarea
             className='w-full p-4 border-2 border-gray-100 dark:border-gray-700 rounded-xl 
-                     focus:ring-2 focus:ring-green-400 focus:border-transparent 
-                     transition-all duration-200 text-gray-700 dark:text-gray-200 
-                     bg-white dark:bg-gray-800 min-h-[150px]'
+                    focus:ring-2 focus:ring-green-400 focus:border-transparent 
+                    transition-all duration-200 text-gray-700 dark:text-gray-200 
+                    bg-white dark:bg-gray-800 min-h-[150px]'
             value={patientDescription}
             onChange={(e) => setPatientDescription(e.target.value)}
             placeholder="Describe the patient's situation, symptoms, or concerns in detail..."

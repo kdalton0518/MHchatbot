@@ -1,28 +1,25 @@
 'use client'
 
-import Link from 'next/link'
-import { signOut } from 'next-auth/react'
-import { Icons } from '@/src/components/Base/Icons'
-import { MainNav } from '@/src/components/Sidebar/MainNav'
-import { ThemeToggle } from '@/src/components/Base/ThemeToggle'
 import { buttonVariants } from '@/src/components/Base/Button'
+import { Icons } from '@/src/components/Base/Icons'
+import { ThemeToggle } from '@/src/components/Base/ThemeToggle'
+import { MainNav } from '@/src/components/Sidebar/MainNav'
 import { siteConfig } from '@/src/config/site'
-import { useSession } from 'next-auth/react'
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
-
-import toast from 'react-hot-toast'
+import { signOut, useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export function TopMenuBar() {
   const { data: session } = useSession()
 
   return (
     <header className='bg-gradient-to-br from-green-50 to-green-50 dark:from-black dark:to-black sticky top-0 z-40 w-full border-b shadow-sm dark:border-gray-800'>
-      <div className='container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
+      <div className='flex h-16 px-20 items-center space-x-4 sm:justify-between sm:space-x-0'>
         <MainNav items={siteConfig.mainNav} />
         <div className='flex flex-1 items-center justify-end space-x-4'>
           <nav className='flex items-center space-x-1'>
@@ -32,7 +29,7 @@ export function TopMenuBar() {
                 <DropdownMenuTrigger className='outline-none group'>
                   <div className='relative'>
                     <img
-                      src={session.user?.image || '/icons/default_user_avatar2.png'}
+                      src={session.user?.image || '/icons/user1.jpg'}
                       alt={session.user.name || 'Root'}
                       className='h-8 w-8 rounded-full object-cover ring-2 ring-primary/30 transition-all duration-200 group-hover:ring-primary'
                     />
@@ -45,7 +42,7 @@ export function TopMenuBar() {
                 >
                   <div className='flex items-center gap-3 p-2'>
                     <img
-                      src={session.user?.image || '/icons/default_user_avatar2.png'}
+                      src={session.user?.image || '/icons/user1.jpg'}
                       alt={session.user.name || 'Root'}
                       className='h-10 w-10 rounded-full object-cover ring-1 ring-gray-300 dark:ring-gray-700'
                     />

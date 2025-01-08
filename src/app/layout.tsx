@@ -1,10 +1,10 @@
-import '@/src/styles/globals.css'
-import type { Metadata } from 'next'
-import { NextAuthProvider } from '@/src/providers/sessionProvider'
-import { ThemeProvider } from '@/src/providers/themeProvider'
 import { siteConfig } from '@/src/config/site'
 import { fontSans } from '@/src/lib/fonts'
 import { cn } from '@/src/lib/utils'
+import { NextAuthProvider } from '@/src/providers/sessionProvider'
+import { ThemeProvider } from '@/src/providers/themeProvider'
+import '@/src/styles/globals.css'
+import type { Metadata } from 'next'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
