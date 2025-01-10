@@ -55,7 +55,7 @@ We believe in making mental health support accessible to everyone, everywhere. T
 Our intelligent chatbot leverages state-of-the-art Large Language Models to deliver a transformative mental health support experience, combining natural, empathetic conversations perfectly tailored to individual needs with real-time emotional support and expert guidance. The system excels at providing personalized mental health resources and coping strategies while maintaining seamless conversation history tracking, all enhanced by sophisticated multi-turn contextual understanding that creates a truly connected and supportive environment for every user.
 
 <div align="center">
-  <img src="public/assets/chatbotllm.png" width="1100" alt="Chatbot Interface" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);"/>
+  <img src="public/assets/chatbot.png" width="1100" alt="Chatbot Interface" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);"/>
   <p align="center"><em>Experience natural conversations with our AI-powered mental health companion</em></p>
 </div>
 

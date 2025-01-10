@@ -105,7 +105,7 @@ export default function Home() {
                     height={80}
                     className='rounded-2xl shadow-md'
                   />
-                  <div className='absolute -bottom-2 -right-2 bg-primary text-white text-xs px-2 py-1 rounded-full'>
+                  <div className='absolute -bottom-2 -right-2 bg-primary dark:bg-primary/90 text-white dark:text-black text-xs px-2 py-1 rounded-full shadow-sm'>
                     {platform.rating}
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export default function Home() {
               </p>
 
               <div className='space-y-4'>
-                <div className='bg-white/60 dark:bg-gray-800/60 rounded-xl p-4 backdrop-blur-sm'>
+                <div className='bg-white/60 dark:bg-gray-700/60 rounded-xl p-4 backdrop-blur-sm'>
                   <h4 className='font-semibold text-primary dark:text-primary/90 mb-2'>
                     Key Features
                   </h4>
@@ -130,14 +130,14 @@ export default function Home() {
                   </ul>
                 </div>
 
-                <div className='flex items-center justify-between bg-white/60 dark:bg-gray-800/60 rounded-xl p-4'>
+                <div className='flex items-center justify-between bg-white/60 dark:bg-gray-700/60 rounded-xl p-4'>
                   <span className='text-gray-600 dark:text-gray-400'>Active Users</span>
                   <span className='font-bold text-primary dark:text-primary/90'>
                     {platform.users}
                   </span>
                 </div>
 
-                <div className='bg-primary/10 dark:bg-primary/5 rounded-xl p-4 text-center text-sm text-primary dark:text-primary/90 font-medium'>
+                <div className='bg-primary/10 dark:bg-primary/4 rounded-xl p-4 text-center text-sm text-primary dark:text-primary/90 font-medium'>
                   {platform.seasonal}
                 </div>
               </div>

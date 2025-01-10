@@ -1,11 +1,11 @@
 import prisma from '@/prisma/client'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { AuthOptions, getServerSession, DefaultSession, Session } from 'next-auth'
+import * as bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { AuthOptions, DefaultSession, getServerSession } from 'next-auth'
 import { DefaultJWT, JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
-import jwt from 'jsonwebtoken'
-import * as bcrypt from 'bcrypt'
 
 declare module 'next-auth' {
   interface Session extends DefaultSession {
@@ -25,6 +25,11 @@ declare module 'next-auth/jwt' {
 }
 
 export const authConfig: AuthOptions = {
+  pages: {
+    signIn: '/sign-in',
+    signOut: '/sign-out',
+    error: '/error',
+  },
   secret: process.env.NEXTAUTH_SECRET!,
   providers: [
     // Credentials Provider
@@ -78,12 +83,14 @@ export const authConfig: AuthOptions = {
         token.tokenType = 'Bearer'
       }
 
-      const dbUser = await prisma.user.findUnique({
-        where: { email: token.email },
-      })
+      if (token.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email },
+        })
 
-      if (dbUser) {
-        token.sub = dbUser.id
+        if (dbUser) {
+          token.sub = dbUser.id
+        }
       }
 
       return token
@@ -100,10 +107,6 @@ export const authConfig: AuthOptions = {
 
       return session
     },
-  },
-  pages: {
-    signIn: '/auth/signin', // Custom sign-in page
-    error: '/auth/error', // Error page
   },
 }
 // Generate Access Token

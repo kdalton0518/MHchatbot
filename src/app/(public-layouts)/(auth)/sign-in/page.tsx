@@ -5,7 +5,6 @@ import { signIn } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 
@@ -16,7 +15,6 @@ export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const { theme, setTheme } = useTheme()
-  const router = useRouter()
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev)
@@ -38,7 +36,7 @@ export default function SignIn() {
         setError('Invalid credentials')
         toast.error('Invalid credentials')
       } else if (result) {
-        router.push('/apis')
+        window.location.href = '/apis'
         toast.success('Welcome!')
       }
     } catch (err) {
