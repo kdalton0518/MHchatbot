@@ -48,10 +48,6 @@ We believe in making mental health support accessible to everyone, everywhere. T
 - 🎯 Goal-oriented personal growth guidance
 - 🌟 24/7 availability for when you need support most
 
-<!-- <div align="center">
-  <img src="public/assets/preview.gif" width="800" alt="Chatbot Preview" style="border-radius: 15px; margin: 30px 0; box-shadow: 0 8px 24px rgba(0,0,0,0.1);"/>
-</div> -->
-
 ## ✨ Key Features
 
 ### 🤖 AI-Powered Conversations
@@ -92,51 +88,57 @@ Our sophisticated semantic search engine harnesses cutting-edge natural language
 ## 🚀 Tech Stack
 
 <div align="center">
-  <div class="tech-grid" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); padding: 2rem; border-radius: 16px; margin: 2rem 0;">
-    <div class="row" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
-      <!-- Frontend -->
-      <div class="tech-card" style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; text-align: center; transition: transform 0.3s;">
-        <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" width="80" alt="Next.js" style="filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))"/>
-        <h3 style="color: #ffffff; margin: 1rem 0;">Next.js 14</h3>
-        <p style="color: #a0aec0;">Powering Our Modern Frontend</p>
-      </div>
-      <!-- Backend -->
-      <div class="tech-card" style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; text-align: center;">
-        <img src="https://cdn.worldvectorlogo.com/logos/fastapi-1.svg" width="80" alt="FastAPI" style="filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.5))"/>
-        <h3 style="color: #ffffff; margin: 1rem 0;">FastAPI</h3>
-        <p style="color: #a0aec0;">High-Performance Backend</p>
-      </div>
-      <!-- Language -->
-      <div class="tech-card" style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; text-align: center;">
-        <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" width="80" alt="TypeScript" style="filter: drop-shadow(0 0 8px rgba(49, 120, 198, 0.5))"/>
-        <h3 style="color: #ffffff; margin: 1rem 0;">TypeScript</h3>
-        <p style="color: #a0aec0;">Type-Safe Development</p>
-      </div>
-    </div>
-    <div class="row" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-      <!-- Database -->
-      <div class="tech-card" style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; text-align: center;">
-        <img src="https://cdn.worldvectorlogo.com/logos/postgresql.svg" width="80" alt="PostgreSQL" style="filter: drop-shadow(0 0 8px rgba(51, 103, 145, 0.5))"/>
-        <h3 style="color: #ffffff; margin: 1rem 0;">PostgreSQL</h3>
-        <p style="color: #a0aec0;">Reliable Data Storage</p>
-      </div>
-      <!-- AI -->
-      <div class="tech-card" style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; text-align: center;">
-        <img src="https://cdn.worldvectorlogo.com/logos/openai-2.svg" width="80" alt="OpenAI" style="filter: drop-shadow(0 0 8px rgba(86, 204, 242, 0.5))"/>
-        <h3 style="color: #ffffff; margin: 1rem 0;">OpenAI</h3>
-        <p style="color: #a0aec0;">AI-Powered Intelligence</p>
-      </div>
-      <!-- Auth -->
-      <div class="tech-card" style="background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; text-align: center;">
-        <img src="https://next-auth.js.org/img/logo/logo.png" width="80" alt="NextAuth.js" style="filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.5))"/>
-        <h3 style="color: #ffffff; margin: 1rem 0;">NextAuth.js</h3>
-        <p style="color: #a0aec0;">Secure Authentication</p>
-      </div>
-    </div>
-  </div>
-  <div style="text-align: center; margin-top: 2rem;">
-    <p style="color: #4a5568; font-style: italic;">✨ Built with cutting-edge technologies for optimal performance and reliability ✨</p>
-  </div>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" width="60" alt="Next.js"/>
+        <br />
+        <strong>Next.js 14</strong>
+        <br />
+        Modern Frontend
+      </td>
+      <td align="center">
+        <img src="https://cdn.worldvectorlogo.com/logos/fastapi-1.svg" width="60" alt="FastAPI"/>
+        <br />
+        <strong>FastAPI</strong>
+        <br />
+        Backend API
+      </td>
+      <td align="center">
+        <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" width="60" alt="TypeScript"/>
+        <br />
+        <strong>TypeScript</strong>
+        <br />
+        Type Safety
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://cdn.worldvectorlogo.com/logos/postgresql.svg" width="60" alt="PostgreSQL"/>
+        <br />
+        <strong>PostgreSQL</strong>
+        <br />
+        Database
+      </td>
+      <td align="center">
+        <img src="https://cdn.worldvectorlogo.com/logos/openai-2.svg" width="60" alt="OpenAI"/>
+        <br />
+        <strong>OpenAI</strong>
+        <br />
+        AI Intelligence
+      </td>
+      <td align="center">
+        <img src="https://next-auth.js.org/img/logo/logo.png" width="60" alt="NextAuth.js"/>
+        <br />
+        <strong>NextAuth.js</strong>
+        <br />
+        Authentication
+      </td>
+    </tr>
+  </table>
+
+✨ Built with cutting-edge technologies for optimal performance and reliability ✨
+
 </div>
 
 ### 🏗️ System Architecture
