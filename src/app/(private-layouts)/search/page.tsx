@@ -39,7 +39,7 @@ export default function SemanticSearch() {
   }
 
   return (
-    <div className='bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
+    <div className='bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
       <div className='container max-w-6xl mx-auto px-4'>
         <div className='overflow-x-auto bg-white dark:bg-gray-800 rounded-xl shadow-md mb-20 pb-5'>
           <table className='w-full'>
@@ -99,7 +99,7 @@ export default function SemanticSearch() {
           </table>
         </div>
 
-        <div className='fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900'>
+        <div className='fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-gray-900 dark:to-gray-900'>
           <div className='container max-w-6xl mx-auto'>
             <div className='flex items-center bg-white border-none dark:bg-gray-800 rounded-xl'>
               <input
@@ -114,7 +114,9 @@ export default function SemanticSearch() {
                 onClick={handleSearch}
                 disabled={loading}
                 className={`px-8 py-4 border-none rounded-r-xl flex items-center gap-2 shadow-lg ${
-                  loading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-500 transition-colors'
+                  loading
+                    ? 'bg-gray-400 dark:bg-gray-600'
+                    : 'bg-green-600 dark:bg-gray-500 hover:bg-green-700 dark:hover:bg-gray-400 transition-colors'
                 } text-white`}
               >
                 <Search className='h-5 w-5' />

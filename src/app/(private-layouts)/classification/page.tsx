@@ -39,7 +39,7 @@ export default function MLclassification() {
   }
 
   return (
-    <div className='relative h-screen bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900 overflow-hidden'>
+    <div className='relative h-screen bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-gray-900 dark:to-gray-900 overflow-hidden'>
       <div className='container max-w-6xl mx-auto px-4'>
         <div className='bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mt-10 mb-6'>
           <textarea
@@ -57,10 +57,10 @@ export default function MLclassification() {
           <button
             onClick={handlePredict}
             disabled={loading}
-            className={`px-8 py-3 text-lg font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 ${
+            className={`px-8 py-3 text-lg font-semibold rounded-md transition-all duration-200 transform hover:scale-105 ${
               loading
-                ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
-                : 'bg-green-500 hover:bg-green-600 text-white hover:shadow-lg'
+                ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed dark:text-gray-300'
+                : 'bg-green-600 dark:bg-gray-600 text-white hover:bg-green-700 dark:hover:bg-gray-500 hover:shadow-lg dark:shadow-gray-900/30'
             }`}
           >
             {loading ? (

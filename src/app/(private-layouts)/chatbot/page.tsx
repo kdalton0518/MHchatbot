@@ -80,7 +80,7 @@ const LLMchatbot: React.FC = () => {
   }
 
   return (
-    <div className='bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
+    <div className='bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
       <div className='container max-w-6xl mx-auto mb-20 pb-10'>
         {messages.map((message, index) => (
           <div
@@ -101,8 +101,8 @@ const LLMchatbot: React.FC = () => {
             <div
               className={`mb-4 px-4 py-3 rounded-2xl max-w-[70%] ${
                 message.role === 'user'
-                  ? 'bg-green-600 text-white rounded-tr-none dark:bg-gray-700 dark:text-gray-300'
-                  : 'bg-green-100 text-gray-900 rounded-tl-none dark:bg-gray-900 dark:text-gray-400'
+                  ? 'bg-gradient-to-br from-green-600 to-green-700 text-white rounded-tr-none dark:from-gray-700 dark:to-gray-800 dark:text-gray-200'
+                  : 'bg-emerald-50 text-gray-900 rounded-tl-none dark:bg-gray-900 dark:text-gray-400'
               }`}
             >
               <ReactMarkdown className='prose prose-gray max-w-none leading-relaxed'>
@@ -121,7 +121,7 @@ const LLMchatbot: React.FC = () => {
           </div>
         ))}
 
-        <div className='fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900'>
+        <div className='fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-gray-900 dark:to-gray-900'>
           <div className='container max-w-6xl mx-auto'>
             <div className='relative'>
               <input
@@ -133,7 +133,7 @@ const LLMchatbot: React.FC = () => {
                 onKeyDown={handleKeyDown}
               />
               <button
-                className='absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-green-500 text-white rounded-lg hover:bg-green-400 focus:ring-2 focus:ring-green-500 transition-all duration-200'
+                className='absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-green-600 text-white rounded-lg hover:bg-green-500 focus:ring-2 focus:ring-green-500 transition-all dark:bg-gray-700 dark:hover:bg-gray-600 duration-100'
                 onClick={handleSend}
               >
                 <svg

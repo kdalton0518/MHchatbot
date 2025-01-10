@@ -5,6 +5,7 @@
     "next.config.*": "*.config.js, *.config.ts",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, ",
     ".prettierrc.*": ".eslint*, eslint*, .prettier*, prettier*, .editorconfig",
+    "readme.md": "*.mmd",
     "prisma/schema.prisma": ".env, .env.*",
     "src/lib/auth.ts": "middleware.ts"
   },

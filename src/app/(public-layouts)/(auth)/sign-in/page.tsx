@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import { signIn } from 'next-auth/react'
-import Link from 'next/link'
-import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { Eye, EyeOff, ArrowLeft } from 'lucide-react'
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)
@@ -54,7 +54,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-green-100 to-green-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center p-4'>
+    <div className='min-h-screen bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center p-4'>
       <Link
         href='/'
         className='absolute top-8 left-8 inline-flex items-center px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-200 group'

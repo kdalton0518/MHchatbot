@@ -66,7 +66,7 @@ export default function UserProfile(props: UserProfileProps) {
   }
 
   return (
-    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-green-100 to-green-200 dark:to-gray-900 dark:from-gray-800 flex items-center justify-center p-4'>
+    <div className='h-[calc(100vh-65px)] bg-gradient-to-br from-emerald-50 to-emerald-50 dark:to-gray-900 dark:from-gray-900 flex items-center justify-center p-4'>
       <div className='w-full max-w-md backdrop-blur-sm backdrop-filter'>
         <div
           className={`max-w-2xl mx-auto p-8 rounded-2xl shadow-2xl ${

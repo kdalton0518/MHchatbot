@@ -5,7 +5,7 @@ import '@/src/styles/swagger.css'
 export default async function Scrapers() {
   const spec = await getApiDocs()
   return (
-    <div className='bg-gradient-to-br from-green-100 to-green-100 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
+    <div className='bg-gradient-to-br from-emerald-50 to-emerald-50 dark:from-gray-900 dark:to-gray-900 min-h-screen py-8 overflow-x-hidden'>
       <div className='container max-w-6xl mx-auto mb-20 pb-10'>
         <ReactSwagger spec={spec} />
       </div>
