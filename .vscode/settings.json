@@ -1,13 +1,12 @@
 {
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
+    ".env.example": ".env*",
+    ".prettierrc.*": ".eslint*, eslint*, .prettier*, prettier*, .editorconfig",
     "tsconfig.json": "tsconfig.*.json, env.d.ts",
     "next.config.*": "*.config.js, *.config.ts",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, ",
-    ".prettierrc.*": ".eslint*, eslint*, .prettier*, prettier*, .editorconfig",
-    "readme.md": "*.mmd",
-    "prisma/schema.prisma": ".env, .env.*",
-    "src/lib/auth.ts": "middleware.ts"
+    "readme.md": "*.mmd"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",

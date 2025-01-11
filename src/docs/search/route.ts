@@ -1,7 +1,7 @@
 /**
  * @swagger
  * paths:
- *   /api/v1/semanticsearch:
+ *   /fastapi/semanticsearch:
  *     post:
  *       summary: Perform semantic search on mental health related content
  *       tags:

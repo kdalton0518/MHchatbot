@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "fastapi-dev": "pip3 install -r requirements.txt && python3 -m uvicorn api.main:app --reload",
+    "fastapi-dev": "uvicorn api.v1.index:app --reload",
     "next-dev": "next dev",
     "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
     "build": "next build",
@@ -64,5 +64,8 @@
     "tailwindcss": "^3.4.16",
     "ts-node": "^10.9.2",
     "typescript": "5.6.2"
+  },
+  "engines": {
+    "node": "18.20.x"
   }
 }

@@ -1,7 +1,7 @@
 /**
  * @swagger
  * paths:
- *   /api/v1/classification:
+ *   /fastapi/classification:
  *     post:
  *       summary: Classify mental health related queries using ML model
  *       tags:

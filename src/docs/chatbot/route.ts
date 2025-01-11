@@ -1,7 +1,7 @@
 /**
  * @swagger
  * paths:
- *   /api/v1/chatbot:
+ *   /fastapi/chatbot:
  *     post:
  *       summary: Send message to Mental Health Counseling Chatbot
  *       tags:
@@ -33,7 +33,7 @@
  *         '500':
  *           description: Internal server error during processing
  *
- *   /api/v1/chathistory:
+ *   /fastapi/chathistory:
  *     post:
  *       summary: Retrieve chat history for a user
  *       tags:
