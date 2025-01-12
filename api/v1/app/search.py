@@ -18,7 +18,7 @@ class SemanticSearch():
         async with self.async_session() as session:
             sql = text("""
             SELECT id, context, response, semantic_vector <=> cast(:query_vector as vector) as similarity
-            FROM public."Embedding" 
+            FROM "Embedding" 
             ORDER BY semantic_vector <=> cast(:query_vector as vector)
             LIMIT 5
             """)

@@ -51,7 +51,7 @@ def get_top_k_vectors(query_vector):
     with sync_session() as session:
         sql = text("""
         SELECT context, response, semantic_vector <=> cast(:query_vector as vector) as similarity
-        FROM public."Embedding" 
+        FROM "Embedding" 
         ORDER BY semantic_vector <=> cast(:query_vector as vector)
         LIMIT 5
         """)
@@ -242,14 +242,14 @@ class MHChatBot():
     async def get_chat_history(self, user_id: str):
         async with self.async_session() as session:
             # First verify the user exists
-            user_check = text("SELECT id FROM public.\"User\" WHERE id = :user_id")
+            user_check = text("""SELECT id FROM \"User\" WHERE id = :user_id""")
             user_result = await session.execute(user_check, {"user_id": user_id})
             if not user_result.first():
                 return []
                 
             sql = text("""
             SELECT "id", "user", "assistant", "user_id", "created_at" 
-            FROM public."Conversations" 
+            FROM "Conversations" 
             WHERE user_id = :user_id
             ORDER BY created_at ASC
             """)
@@ -265,13 +265,13 @@ class MHChatBot():
     async def save_chat_history(self, user_id: str, user: str, assistant: str):
         async with self.async_session() as session:
             # First verify the user exists
-            user_check = text("SELECT id FROM public.\"User\" WHERE id = :user_id")
+            user_check = text("""SELECT id FROM "User" WHERE id = :user_id""")
             user_result = await session.execute(user_check, {"user_id": user_id})
             if not user_result.first():
                 return False
                 
             sql = text("""
-            INSERT INTO public."Conversations" ("id", "user", "assistant", "user_id", "created_at")
+            INSERT INTO "Conversations" ("id", "user", "assistant", "user_id", "created_at")
             VALUES (gen_random_uuid(), :user, :assistant, :user_id, now())
             """)
 
