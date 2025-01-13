@@ -6,7 +6,7 @@ const nextConfig = {
         source: '/api/v1/:path*',
         destination:
           process.env.NODE_ENV === 'development'
-            ? 'http://localhost:8000/fastapi/:path*'
+            ? 'https://m-chatbot.vercel.app/fastapi/:path*'
             : '/api/v1/:path*',
       },
     ]
@@ -18,7 +18,7 @@ const nextConfig = {
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
           { key: 'Access-Control-Allow-Origin', value: 'https://m-chatbot.vercel.app' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT,OPTIONS' },
           {
             key: 'Access-Control-Allow-Headers',
             value:
