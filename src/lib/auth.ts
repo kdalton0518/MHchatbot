@@ -117,15 +117,16 @@ export const authConfig: AuthOptions = {
       return session
     },
   },
+  useSecureCookies: true,
   cookies: {
     sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+      name: `next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: true,
-        domain: '.vercel.app', // Adjust this based on your domain
+        secure: process.env.NODE_ENV === 'production',
+        domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
       },
     },
   },
