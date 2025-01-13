@@ -1,0 +1,46 @@
+# Development
+.git
+.gitignore
+.env
+.env.*
+*.log
+.vscode
+.idea
+*.md
+!README.md
+
+# Dependencies
+node_modules
+venv
+__pycache__
+*.pyc
+
+# Testing
+coverage
+.nyc_output
+tests
+test
+*.test.js
+*.spec.js
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Temporary files
+.DS_Store
+*.swp
+*.swo
+tmp
+temp
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# Debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

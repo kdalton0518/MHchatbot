@@ -44,18 +44,18 @@ export const authConfig: AuthOptions = {
           return null
         }
 
-        // const user = await prisma.user.findUnique({
-        //   where: { email: credentials.email },
-        // })
-        const user = {
-          id: 'cm5r233hb0000kee8idgbfntn',
-          email: 'admin@gmail.com',
-          password: '$2b$10$55lnfWh.b.47xc2DJmgoEO54t3TSJccyknvZKa9DyDE/UwTWMqaW2',
-          name: 'admin',
-          image: null,
-          created_at: '2025-01-10T17:53:32.256Z',
-          updated_at: '2025-01-10T17:53:32.256Z',
-        }
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email },
+        })
+        // const user = {
+        //   id: 'cm5r233hb0000kee8idgbfntn',
+        //   email: 'admin@gmail.com',
+        //   password: '$2b$10$55lnfWh.b.47xc2DJmgoEO54t3TSJccyknvZKa9DyDE/UwTWMqaW2',
+        //   name: 'admin',
+        //   image: null,
+        //   created_at: '2025-01-10T17:53:32.256Z',
+        //   updated_at: '2025-01-10T17:53:32.256Z',
+        // }
 
         if (credentials.email != user.email || !user.password) {
           return null
@@ -115,6 +115,18 @@ export const authConfig: AuthOptions = {
       }
 
       return session
+    },
+  },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: true,
+        domain: '.vercel.app', // Adjust this based on your domain
+      },
     },
   },
 }

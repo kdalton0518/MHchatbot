@@ -3,6 +3,7 @@
   "explorer.fileNesting.patterns": {
     ".env.example": ".env*",
     ".prettierrc.*": ".eslint*, eslint*, .prettier*, prettier*, .editorconfig",
+    "Dockerfile": ".dockerignore",
     "tsconfig.json": "tsconfig.*.json, env.d.ts",
     "next.config.*": "*.config.js, *.config.ts",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, ",
